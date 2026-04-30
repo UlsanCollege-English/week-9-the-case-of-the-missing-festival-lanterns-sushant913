@@ -1,4 +1,5 @@
-"""Starter tests for Week 9 Homework.
+"""
+Starter tests for Week 9 Homework.
 
 Run with:
 
@@ -50,15 +51,18 @@ def test_analyze_lanterns_full_starter_data():
         "silver-fox",
         "red-kite",
     }
+
     assert result["missing_lanterns"] == {"white-lotus"}
     assert result["unexpected_lanterns"] == {"silver-fox"}
     assert result["duplicate_lanterns"] == {"river-dragon"}
+
     assert result["count_by_section"] == {
         "North Gate": 2,
         "River Walk": 2,
         "Market Street": 2,
         "South Bridge": 1,
     }
+
     assert result["wrong_section_lanterns"] == {
         "red-kite": {
             "expected": "Temple Road",
@@ -80,11 +84,15 @@ def test_analyze_lanterns_empty_input():
 
 def test_analyze_lanterns_detects_duplicate_lanterns():
     expected_lanterns = {"moon-rabbit"}
+
     lantern_log = [
         ("moon-rabbit", "River Walk"),
         ("moon-rabbit", "River Walk"),
     ]
-    correct_sections = {"moon-rabbit": "River Walk"}
+
+    correct_sections = {
+        "moon-rabbit": "River Walk"
+    }
 
     result = analyze_lanterns(expected_lanterns, lantern_log, correct_sections)
 
@@ -93,10 +101,14 @@ def test_analyze_lanterns_detects_duplicate_lanterns():
 
 def test_analyze_lanterns_detects_wrong_section():
     expected_lanterns = {"red-kite"}
+
     lantern_log = [
         ("red-kite", "South Bridge"),
     ]
-    correct_sections = {"red-kite": "Temple Road"}
+
+    correct_sections = {
+        "red-kite": "Temple Road"
+    }
 
     result = analyze_lanterns(expected_lanterns, lantern_log, correct_sections)
 
@@ -110,10 +122,14 @@ def test_analyze_lanterns_detects_wrong_section():
 
 def test_analyze_lanterns_ignores_unexpected_lantern_for_wrong_section():
     expected_lanterns = {"red-kite"}
+
     lantern_log = [
         ("silver-fox", "Market Street"),
     ]
-    correct_sections = {"red-kite": "Temple Road"}
+
+    correct_sections = {
+        "red-kite": "Temple Road"
+    }
 
     result = analyze_lanterns(expected_lanterns, lantern_log, correct_sections)
 
@@ -121,9 +137,74 @@ def test_analyze_lanterns_ignores_unexpected_lantern_for_wrong_section():
     assert result["wrong_section_lanterns"] == {}
 
 
-# TODO: Add at least one more meaningful test of your own before submitting.
-# Good options:
-# - all expected lanterns are present and in the correct section
-# - the log is empty but expected_lanterns is not empty
-# - the same lantern appears three times
-# - an expected lantern appears once correctly and once in the wrong section
+def test_analyze_lanterns_all_correct():
+    expected_lanterns = {"red-kite", "moon-rabbit"}
+
+    lantern_log = [
+        ("red-kite", "Temple Road"),
+        ("moon-rabbit", "River Walk"),
+    ]
+
+    correct_sections = {
+        "red-kite": "Temple Road",
+        "moon-rabbit": "River Walk",
+    }
+
+    result = analyze_lanterns(expected_lanterns, lantern_log, correct_sections)
+
+    assert result["missing_lanterns"] == set()
+    assert result["unexpected_lanterns"] == set()
+    assert result["duplicate_lanterns"] == set()
+    assert result["wrong_section_lanterns"] == {}
+
+
+def test_analyze_lanterns_empty_log_with_expected_items():
+    expected_lanterns = {"red-kite", "white-lotus"}
+
+    result = analyze_lanterns(expected_lanterns, [], {})
+
+    assert result["seen_lanterns"] == set()
+    assert result["missing_lanterns"] == {"red-kite", "white-lotus"}
+    assert result["unexpected_lanterns"] == set()
+
+
+def test_analyze_lanterns_three_duplicates():
+    expected_lanterns = {"river-dragon"}
+
+    lantern_log = [
+        ("river-dragon", "North Gate"),
+        ("river-dragon", "North Gate"),
+        ("river-dragon", "North Gate"),
+    ]
+
+    correct_sections = {
+        "river-dragon": "North Gate"
+    }
+
+    result = analyze_lanterns(expected_lanterns, lantern_log, correct_sections)
+
+    assert result["duplicate_lanterns"] == {"river-dragon"}
+
+
+def test_analyze_lanterns_correct_and_wrong_same_lantern():
+    expected_lanterns = {"red-kite"}
+
+    lantern_log = [
+        ("red-kite", "Temple Road"),
+        ("red-kite", "South Bridge"),
+    ]
+
+    correct_sections = {
+        "red-kite": "Temple Road"
+    }
+
+    result = analyze_lanterns(expected_lanterns, lantern_log, correct_sections)
+
+    assert result["duplicate_lanterns"] == {"red-kite"}
+
+    assert result["wrong_section_lanterns"] == {
+        "red-kite": {
+            "expected": "Temple Road",
+            "actual": "South Bridge",
+        }
+    }
