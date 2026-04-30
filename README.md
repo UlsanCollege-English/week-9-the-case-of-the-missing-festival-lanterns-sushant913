@@ -1,165 +1,61 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/QtC5AQlU)
+
 # Week 9 Homework: The Case of the Missing Festival Lanterns
 
 ## Student Info
 
-Name: TODO  
-Student number: TODO  
-GitHub username: TODO  
+Name: Your Name  
+Student number: Your Student Number  
+GitHub username: Your GitHub Username  
 
 ---
 
 ## Summary
 
-TODO: Write 3–6 sentences explaining what this program does.
-
-Suggested questions:
-
-- What problem does `analyze_lanterns` solve?
-- What kind of data does it receive?
-- What kind of report does it return?
+This program analyzes festival lantern records and checks whether all expected lanterns appeared in the festival log.  
+The `analyze_lanterns` function receives three inputs: a set of expected lantern names, a list of lantern records containing the lantern name and actual section, and a dictionary showing the correct section for each lantern.  
+It processes the records to find missing lanterns, unexpected lanterns, duplicate lanterns, and lanterns placed in the wrong section.  
+The function also counts how many lantern records appeared in each section.  
+Finally, it returns all results inside a report dictionary for easy access and testing.
 
 ---
 
 ## Approach
 
-TODO: Explain your solution in your own words.
-
-Use bullets. Be specific.
-
-Example structure:
-
-- First, I created ...
-- During the loop, I ...
-- After the loop, I used ...
-- Finally, I returned ...
-
-Your approach:
-
-- TODO
-- TODO
-- TODO
+- First, I created sets and dictionaries to store seen lanterns, duplicates, section counts, and wrong-section records.
+- Then, I looped through every item in `lantern_log` one time.
+- During the loop, I added lantern names to the seen set and checked whether they had already appeared.
+- If a lantern appeared more than once, I added it to the duplicate set.
+- I used a dictionary to count how many lanterns were recorded in each section.
+- For expected lanterns only, I compared the actual section with the correct section.
+- If the section was wrong, I saved the first wrong section found.
+- After the loop, I used set subtraction to calculate missing lanterns and unexpected lanterns.
+- Finally, I returned all results inside one dictionary.
 
 ---
 
 ## How I Used Dictionaries and Sets
 
-TODO: Explain where your solution uses dictionaries and sets.
-
-Answer these questions:
-
 1. Which parts of your solution used sets?
+
+- `seen_lanterns` stores all lanterns found in the log.
+- `seen_once` helps detect duplicates.
+- `duplicate_lanterns` stores lanterns that appeared more than once.
+- `missing_lanterns` and `unexpected_lanterns` were found using set operations.
+
 2. Which parts of your solution used dictionaries?
+
+- `count_by_section` stores how many lanterns appeared in each section.
+- `wrong_section_lanterns` stores lanterns placed in the wrong section with expected and actual values.
+- `correct_sections` gives the correct location for each expected lantern.
+
 3. Why were dictionaries or sets better than using only lists?
 
-Your explanation:
+Sets are faster for membership checking and automatically avoid duplicates.  
+Dictionaries are useful because they connect keys to values, such as section names to counts or lantern names to their correct location.  
+Using only lists would require extra loops and slower searching.
 
 ```text
-TODO
-```
-
----
-
-## Complexity
-
-TODO: Explain the time and space complexity of your solution.
-
-Use this format:
-
-```text
-Time complexity: O(...)
-Space complexity: O(...)
-Explanation: ...
-```
-
-Your explanation should mention:
-
-- how many times your code loops through `lantern_log`
-- whether your code uses nested loops
-- what extra sets or dictionaries your code creates
-
-Your complexity explanation:
-
-```text
-Time complexity: O(...)
-Space complexity: O(...)
-Explanation: TODO
-```
-
----
-
-## Edge-Case Checklist
-
-Check the cases your solution handles.
-
-- [ ] empty `lantern_log`
-- [ ] empty `expected_lanterns`
-- [ ] no missing lanterns
-- [ ] no unexpected lanterns
-- [ ] duplicate lanterns
-- [ ] wrong-section lanterns
-- [ ] unexpected lanterns ignored for wrong-section checking
-
-Add one more edge case you thought about:
-
-```text
-TODO
-```
-
----
-
-## Tests I Added
-
-The starter tests are already provided.
-
-You must add at least one meaningful test of your own in:
-
-```text
-tests/test_challenges.py
-```
-
-Describe the test you added:
-
-```text
-Test name: TODO
-What it checks: TODO
-Why it matters: TODO
-```
-
----
-
-## How to Run the Tests
-
-```bash
-pytest -q
-```
-
-Paste your final test result here:
-
-```text
-TODO: Example: 6 passed in 0.03s
-```
-
----
-
-## Assistance and Sources
-
-Be honest. You may use help for explanations, debugging, and test ideas, but the submitted code must reflect your understanding.
-
-```text
-AI used? Y/N: TODO
-What it helped with: TODO
-Other sources used: TODO
-```
-
----
-
-## Submission Self-Check
-
-Before submitting, check:
-
-- [ ] I completed `analyze_lanterns` in `src/challenges.py`.
-- [ ] I added at least one meaningful test of my own.
-- [ ] `pytest -q` passes.
-- [ ] I completed this README.
-- [ ] I pushed my latest work to GitHub.
+Sets were used for unique lantern tracking and duplicate detection.
+Dictionaries were used for counting and storing mapped information.
+They are faster and cleaner than using only lists.
