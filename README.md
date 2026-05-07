@@ -1,21 +1,30 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/QtC5AQlU)
-
 # Week 9 Homework: The Case of the Missing Festival Lanterns
 
 ## Student Info
 
-Name: Your Name  
-Student number: Your Student Number  
-GitHub username: Your GitHub Username  
+Name: Sushant Thapa Chhetri
+Student number: 2412092
+GitHub username: sushant913
 
 ---
 
 ## Summary
 
 This program analyzes festival lantern records and checks whether all expected lanterns appeared in the festival log.  
-The `analyze_lanterns` function receives three inputs: a set of expected lantern names, a list of lantern records containing the lantern name and actual section, and a dictionary showing the correct section for each lantern.  
-It processes the records to find missing lanterns, unexpected lanterns, duplicate lanterns, and lanterns placed in the wrong section.  
+
+The `analyze_lanterns` function receives three inputs:
+- a set of expected lantern names,
+- a list of lantern records containing the lantern name and actual section,
+- and a dictionary showing the correct section for each lantern.
+
+It processes the records to find:
+- missing lanterns,
+- unexpected lanterns,
+- duplicate lanterns,
+- and lanterns placed in the wrong section.
+
 The function also counts how many lantern records appeared in each section.  
+
 Finally, it returns all results inside a report dictionary for easy access and testing.
 
 ---
@@ -36,23 +45,25 @@ Finally, it returns all results inside a report dictionary for easy access and t
 
 ## How I Used Dictionaries and Sets
 
-1. Which parts of your solution used sets?
+### 1. Which parts of your solution used sets?
 
 - `seen_lanterns` stores all lanterns found in the log.
 - `seen_once` helps detect duplicates.
 - `duplicate_lanterns` stores lanterns that appeared more than once.
 - `missing_lanterns` and `unexpected_lanterns` were found using set operations.
 
-2. Which parts of your solution used dictionaries?
+### 2. Which parts of your solution used dictionaries?
 
 - `count_by_section` stores how many lanterns appeared in each section.
 - `wrong_section_lanterns` stores lanterns placed in the wrong section with expected and actual values.
 - `correct_sections` gives the correct location for each expected lantern.
 
-3. Why were dictionaries or sets better than using only lists?
+### 3. Why were dictionaries or sets better than using only lists?
 
 Sets are faster for membership checking and automatically avoid duplicates.  
+
 Dictionaries are useful because they connect keys to values, such as section names to counts or lantern names to their correct location.  
+
 Using only lists would require extra loops and slower searching.
 
 ```text
